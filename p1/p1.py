@@ -1,5 +1,7 @@
-import math
-
+import math#Para poder hacer raiz cuadrada
+"""
+clase lista dinamica
+"""
 class Lista():
     n=0
     lista=[]
@@ -22,8 +24,12 @@ class Lista():
         return total
     def calDs(self):
         return math.sqrt(self.sumatoriaMedia()/(self.n-1))
+
+"""
+Programa
+"""
 l1=Lista()
-with open("test2.txt",'r') as fp:
+with open("test2.txt",'r') as fp:#test.txt es el primer set de datos, test2.txt segundo set de datos
    num = fp.readlines()
    for i in num:
         l1.agregar(float(i))
