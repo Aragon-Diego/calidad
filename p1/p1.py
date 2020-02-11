@@ -33,7 +33,7 @@ class Lista():
 Programa
 """
 l1=Lista()
-with open("test.txt",'r') as fp:#test.txt es el primer set de datos, test2.txt segundo set de datos
+with open("test2.txt",'r') as fp:#test.txt es el primer set de datos, test2.txt segundo set de datos
    num = fp.readlines()
    for i in num:
         l1.agregar(float(i))
