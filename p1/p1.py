@@ -2,7 +2,7 @@ import math#Para poder hacer raiz cuadrada
 """
 clase lista dinamica
 """
-class Lista():
+class Lista:
     n=0
     lista=[]
 
