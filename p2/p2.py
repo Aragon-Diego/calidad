@@ -20,12 +20,63 @@ Clases:
 
     Clase(arr):
         setArrLineasDelArchivo
+        setNombre
         regresarCantidadDeFunciones
         regresarCantidadDeLineas
-        conteoDeLineas
-        conteoDeFunciones
+        
 """
 import sys
+class Clase:
+    arrLineasDelArchivo=[]
+    nombre=""
+
+    def setArrLineasDelArchivo(self,arr):
+        """
+            Esta funcion sirve para guardar el arreglo de lineas del archivo a contar
+            resive el arreglo de string arr
+            no regresa nada.
+        """
+        self.arrLineasDelArchivo=arr
+
+    def setNombre(self,nombre):
+        """
+            Esta funcion sirve para guardar el nombre del archivo a contar
+            resive el string con el nombre
+            no regresa nada.
+        """
+        self.nombre=nombre[6:-2]
+
+    def regresarCantidadDeFunciones(self):
+        """
+            esta fucnion hace el conteo de funciones
+            regresa la cantidad de funciones en la clase
+        """
+        contador=0
+        for linea in self.arrLineasDelArchivo:
+            if "d"+"ef" in linea:
+                contador+=1
+        return contador
+
+    def regresarCantidadDeLineas(self):
+        """
+            esta fucnion hace el conteo de lineas
+            regresa la cantidad de lineas en la clase
+        """
+        contador=0
+        for linea in self.arrLineasDelArchivo:
+                if "#"+"Base" in linea or "#"+"Eliminado" in linea or  "#"+"Modificado" in linea:
+                    continue
+                contador+=1
+        return contador
+
+    def __init__(self,arregloDeClase):
+        """
+            esta funcion es el constructor de la clase.
+        """
+        self.setArrLineasDelArchivo(arregloDeClase)
+        self.setNombre(self.arrLineasDelArchivo[0])
+        
+
 
 class Programa:
     clases=[]
@@ -43,7 +94,22 @@ class Programa:
             esta funcion es la que toma el arreglo de lineas y lo separa por clases
             no regresa nada
         """
-        pass
+        clases=[]
+        esClase=False
+        i=-1
+        for linea in self.arrLineasDelArchivo:
+            if linea == 'if __name__ == "__main__":\n':
+                esClase=False
+                continue
+            if "c"+"lass" in linea:
+                esClase=True
+                i+=1
+                clases.append([linea])
+                continue
+            elif esClase:
+                clases[i].append(linea)
+                continue
+        self.arrDeLineasPorClase=clases
 
     def conteoAgregado(self):
         """
@@ -59,8 +125,7 @@ class Programa:
             no reresa nada
         """
         for linea in self.arrLineasDelArchivo:
-            if not linea  == "\n":
-                self.total+=1
+            self.total+=1
     
     def limpiarLineas(self):
         """
@@ -140,48 +205,20 @@ class Programa:
         self.conteoModificadas()
         self.conteoBase()
         self.conteoEliminadas()
-        #print("mod:",self.modificadas) 
-        #print("base:",self.base) 
-        #print("elim:",self.eliminado) 
         self.limpiarLineas()
         self.conteoTotal()
-        print("total:",self.total)
         self.conteoAgregado()
-        print("agre:",self.agregadas)
-        #self.filtradoAClases()
-        #for arregloDeClase in  arrDeLineasPorClase: clase=Clase(arregloDeClase)
-
-
-class Clase:
-    arrLineasDelArchivo=[]
-    def setArrLineasDelArchivo(self,arr):
-        """
-            Esta funcion sirve para guardar el arreglo de lineas del archivo a contar
-            resive el arreglo de string arr
-            no regresa nada.
-        """
-        self.arrLineasDelArchivo=arr
-
-    def regresarCantidadDeFunciones(self):
-        """
-            esta fucnion hace el conteo de funciones
-            regresa la cantidad de funciones en la clase
-        """
-        pass
-
-    def regresarCantidadDeLineas(self):
-        """
-            esta fucnion hace el conteo de lineas
-            regresa la cantidad de lineas en la clase
-        """
-        pass
-
-    def __init__(self,arregloDeClase):
-        """
-            esta funcion es el constructor de la clase.
-        """
-        self.setArrLineasDelArchivo(arregloDeClase)
+        self.filtradoAClases()
+        for i in  range(len(self.arrDeLineasPorClase)): 
+            self.clases.append(Clase(self.arrDeLineasPorClase[i]))
+        
+        
 
 if __name__ == "__main__":
     path = str(sys.argv[1])
     programa=Programa(path)
+    clases=programa.clases
+    for clase in clases:
+        print("Nombre: "+clase.nombre+" #Funciones: "+str(clase.regresarCantidadDeFunciones())+" #deLineas: "+str(clase.regresarCantidadDeLineas()))
+    print("El total de lineas es: "+str(programa.total))
+    print("El total de lineas agregadas fue: "+str(programa.agregadas))
