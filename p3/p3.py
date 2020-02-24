@@ -32,6 +32,7 @@ class Estimador:
     b1=0
     r=0
     yResultante=0
+    
     def archivoAArreglo(self,nombreDeArchivo):
         """
             Esta funcion resive un path de un archivo
@@ -147,4 +148,3 @@ if __name__ == "__main__":
         contador+=1
         print("estimado #"+contador)
         estimado.imprimir()
-    
