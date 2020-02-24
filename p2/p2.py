@@ -222,3 +222,6 @@ if __name__ == "__main__":
         print("Nombre: "+clase.nombre+" #Funciones: "+str(clase.regresarCantidadDeFunciones())+" #deLineas: "+str(clase.regresarCantidadDeLineas()))
     print("El total de lineas es: "+str(programa.total))
     print("El total de lineas agregadas fue: "+str(programa.agregadas))
+    print("El total de lineas modificadas fue:"+str(programa.modificadas))
+    print("El total de lineas base fue de: "+str(programa.base))
+    print("El total de lineas eliminadas fue de: "+str(programa.eliminado))
