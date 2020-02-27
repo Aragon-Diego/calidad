@@ -43,8 +43,7 @@ class Estimador:
         arreglo=[]
         with open(nombreDeArchivo) as f:
             arreglo = f.readlines()
-        arreglo = [x.strip() for x in arreglo]
-        arreglo = [float(x) for x in arreglo] 
+        arreglo = [float(x.strip()) for x in arreglo]
         return arreglo
 
     def sumatoria(self,arreglo):
