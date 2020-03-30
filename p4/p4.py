@@ -51,8 +51,7 @@ class Rangos:
         archivo=open(archivo)
         with archivo as f:
             arreglo=f.readlines()
-        arreglo=[ (float(numeros.split(",")[0])/float(numeros.split(",")[1])) for numeros in arreglo 
-            ]
+        arreglo=[ (float(numeros.split(",")[0])/float(numeros.split(",")[1])) for numeros in arreglo]
         self.setDeDatos=arreglo
         
     def arregloALn(self):
@@ -61,8 +60,7 @@ class Rangos:
             y a cada uno de sus elementos le hace un logaritmo natural y lo 
             adjunta a la variable global setDeLn
         """
-        self.setDeLn=[math.log(numero) for numero in self.setDeDatos
-            ]
+        self.setDeLn=[math.log(numero) for numero in self.setDeDatos]
         
     def calcularVariante(self):
         """
