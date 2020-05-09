@@ -17,11 +17,11 @@ Clases:
 """
 import math
 import sys 
-
+sys.setrecursionlimit(1500)
 class Integrar:
     x=0
     dof=0
-
+    p=0
     def gama(self,x):
         """
             Esta función es recursivo. Recibe un valor de X
@@ -65,14 +65,14 @@ class Integrar:
             total+=2*self.F(i*w)
         return total
 
-    def P(self,numSeg):
+    def P(self,x,numSeg):
         """
             Recibe el numero de segmentos, utiliza la x de la clase y tambien el dof
             Evalua la regla de Simpson  
             Regresa el calulo
         """
-        w=self.x/numSeg
-        return (w/3)*(self.F(0)+self.sumaImpar(numSeg,w)+self.sumaPar(numSeg,w)+self.F(self.x))
+        w=x/numSeg
+        return (w/3)*(self.F(0)+self.sumaImpar(numSeg,w)+self.sumaPar(numSeg,w)+self.F(x))
 
     def checarPs(self,p1,p2):
         """
@@ -80,6 +80,9 @@ class Integrar:
             Evalua de forma booleana si el valor de la resta es menor que 0.00001
         """
         return abs(p1-p2) < 0.00001
+    
+    def regresarP(self):
+        return self.p
 
     def __init__(self,x,dof):
         """
@@ -88,18 +91,20 @@ class Integrar:
         self.x=x
         self.dof=dof
         numSeg=10
-        p1=self.P(numSeg)
+        p1=self.P(x,numSeg)
         p2=0
         while True:
             numSeg*=2
-            p2=self.P(numSeg)
+            p2=self.P(x,numSeg)
             if self.checarPs(p1,p2):
                 break
             else:
                 p1=p2
-        print(round(p2,5))
+        self.p=p2
+
             
 if __name__ == "__main__":
     x = float(sys.argv[1])
     dof = int(sys.argv[2])
-    Integrar(x,dof)
+    p=Integrar(x,dof)
+    print(p)
