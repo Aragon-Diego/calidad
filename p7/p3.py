@@ -33,6 +33,7 @@ class Estimador:
     b0=0
     b1=0
     r=0
+    r2=0
     yResultante=0
 
     def archivoAArreglo(self,nombreDeArchivo):
@@ -105,7 +106,8 @@ class Estimador:
         """
             Esta funcion calcula la r**2 y la regresa
         """
-        return self.r**2
+        self.r2= self.r**2
+        return self.r2
 
     def calcularYResultante(self):
         """
@@ -154,6 +156,7 @@ class Estimador:
         self.setXK(xK)
         self.calcularYResultante()
         self.calculaR()
+        self.calculaRCuadrada()
         
 
 if __name__ == "__main__":
